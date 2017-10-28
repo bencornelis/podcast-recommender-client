@@ -16,8 +16,10 @@ class PodcastSearch extends Component {
     this.props.dispatch(updateSearch(value))
   }
 
-  getPodcasts(q) {
+  getPodcasts(term) {
+    const q = term.replace(/\s/g, '+');
     const url = `https://itunes.apple.com/search?term=${q}&media=podcast&limit=10`;
+    
     return fetch(url).then(
       response => response.json(),
       error    => console.log('An error occurred.', error)
