@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import Select from 'react-select';
 import 'react-select/dist/react-select.css';
 import './../styles/PodcastSearch.css';
-import { updateSearch } from './../actions'
+import { updateSearch } from './../actions';
+import fetch from 'isomorphic-fetch';
 
 class PodcastSearch extends Component {
   constructor(props) {
@@ -15,21 +16,33 @@ class PodcastSearch extends Component {
     this.props.dispatch(updateSearch(value))
   }
 
-  render() {
-    const options = [
-      { value: 'one', label: 'One' },
-      { value: 'two', label: 'Two' }
-    ];
+  getPodcasts(q) {
+    const url = `https://itunes.apple.com/search?term=${q}&media=podcast&limit=10`;
+    return fetch(url).then(
+      response => response.json(),
+      error    => console.log('An error occurred.', error)
+    ).then(json => {
+      const options = json.results.map(result => ({
+        value: result.trackId,
+        label: result.trackName
+      }));
 
+      return {
+        options: options
+      }
+    });
+  }
+
+  render() {
     return (
-      <Select
+      <Select.Async
         className='searchbar'
         multi
         name='form-field-name'
-        options={options}
+        loadOptions={this.getPodcasts}
+        autoload={false}
         onChange={this.handleSelectChange}
         value={this.props.value}
-        simpleValue
       />
     )
   }
