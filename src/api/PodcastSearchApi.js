@@ -1,12 +1,12 @@
 class PodcastSearchAPI {
-  static findRelated(itunes_podcast_urls) {
+  static findRelated(podcasts) {
     const request = new Request('http://localhost:3001/podcast_searches', {
       method: 'POST',
       headers: new Headers({
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       }),
-      body: JSON.stringify({itunes_urls: itunes_podcast_urls})
+      body: JSON.stringify({podcasts: podcasts})
     });
 
     return fetch(request).then(response => {

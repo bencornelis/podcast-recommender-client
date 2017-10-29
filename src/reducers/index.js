@@ -8,7 +8,6 @@ export default (state = defaultState, action) => {
        searchbarValue: action.value
      });
     case types.UPDATE_SEARCH_RESULTS:
-      debugger;
       return Object.assign({}, state, {
         searchResults: action.relatedPodcasts
       });
