@@ -5,7 +5,8 @@ import 'react-select/dist/react-select.css';
 import './../styles/PodcastSearch.css';
 import { updateSearchValue, findRelatedPodcasts } from './../actions';
 import fetch from 'isomorphic-fetch';
-import SearchResults from './SearchResults'
+import SearchResults from './SearchResults';
+import Spinner from 'react-spinkit';
 
 class PodcastSearch extends Component {
   constructor(props) {
@@ -58,19 +59,25 @@ class PodcastSearch extends Component {
             autoload={false}
             onChange={this.handleSelectChange}
             value={this.props.value}
-            ref='_searchTerms'
+            onKeyPress={this.handleKeyPress}
           />
-          <button>Find Podcasts</button>
         </form>
         <SearchResults podcasts={this.props.searchResults} />
+        {this.props.loading &&
+          <Spinner
+            name='circle'
+            fadeIn='quarter'
+            color='#007eff' />
+        }
       </div>
     )
   }
 }
 
 const mapStateToProps = state => ({
-  value: state.searchbarValue,
-  searchResults: state.searchResults
+  value:         state.searchbarValue,
+  searchResults: state.searchResults,
+  loading:       state.loading
 });
 
 export default connect(mapStateToProps)(PodcastSearch);

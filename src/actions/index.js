@@ -11,10 +11,21 @@ export const updateSearchResults = relatedPodcasts => ({
   relatedPodcasts
 });
 
+export const clearSearchResults = () => ({
+  type: types.CLEAR_SEARCH_RESULTS
+});
+
+export const updateLoading = () => ({
+  type: types.UPDATE_LOADING
+});
+
 export const findRelatedPodcasts = podcasts => {
   return function (dispatch) {
+    dispatch(clearSearchResults());
+    dispatch(updateLoading());
     return PodcastSearchAPI.findRelated(podcasts).then(json => {
       dispatch(updateSearchResults(json.results));
+      dispatch(updateLoading());
     });
   }
 }

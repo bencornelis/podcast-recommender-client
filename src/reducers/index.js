@@ -11,6 +11,14 @@ export default (state = defaultState, action) => {
       return Object.assign({}, state, {
         searchResults: action.relatedPodcasts
       });
+    case types.UPDATE_LOADING:
+      return Object.assign({}, state, {
+        loading: !state.loading
+      });
+    case types.CLEAR_SEARCH_RESULTS:
+      return Object.assign({}, state, {
+        searchResults: []
+      });
     default:
       return state;
   }

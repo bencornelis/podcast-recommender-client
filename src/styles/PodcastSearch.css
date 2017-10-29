@@ -1,3 +1,26 @@
 .searchbar {
   margin-top: 100px;
 }
+
+
+.search-button {
+  font-size: 14px;
+  border-radius: 5px;
+  float: right;
+  margin-top: 20px;
+  height: 35px;
+  width: 70px;
+  color: #007eff;
+  background: #ebf5ff;
+  border: 1px solid rgba(0, 126, 255, 0.24);
+}
+
+.search-button:hover {
+  cursor: pointer;
+}
+
+div.sk-circle {
+  width: 60px;
+  height: 60px;
+  margin: 150px auto;
+}
