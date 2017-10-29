@@ -1,6 +1,6 @@
 class PodcastSearchAPI {
   static findRelated(podcasts) {
-    const request = new Request('http://localhost:3001/podcast_searches', {
+    const request = new Request('https://hidden-waters-84274.herokuapp.com/podcast_searches', {
       method: 'POST',
       headers: new Headers({
         'Content-Type': 'application/json',
