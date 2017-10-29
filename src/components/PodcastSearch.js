@@ -55,6 +55,7 @@ class PodcastSearch extends Component {
             className='searchbar'
             multi
             name='form-field-name'
+            placeholder='Type in a few podcasts you listen to and hit enter'
             loadOptions={this.getPodcasts}
             autoload={false}
             onChange={this.handleSelectChange}
