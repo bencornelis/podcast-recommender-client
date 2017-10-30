@@ -1,5 +1,5 @@
 export const defaultState = {
-  searchbarValue: '',
+  searchValue: [],
   searchResults: [],
   loading: false
 }

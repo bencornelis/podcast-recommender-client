@@ -11,18 +11,14 @@ import Spinner from 'react-spinkit';
 class PodcastSearch extends Component {
   constructor(props) {
     super(props);
-    this.handleSubmit = this.handleSubmit.bind(this);
     this.handleSelectChange = this.handleSelectChange.bind(this);
   }
 
-  handleSubmit(event) {
-    event.preventDefault();
-    const podcasts = this.props.value.map(value => value.value);
-    this.props.dispatch(findRelatedPodcasts(podcasts))
-  }
+  handleSelectChange(newSearchValue) {
+    this.props.dispatch(updateSearchValue(newSearchValue));
 
-  handleSelectChange(value) {
-    this.props.dispatch(updateSearchValue(value))
+    const podcasts = newSearchValue.map(podcastSearchItem => podcastSearchItem.value);
+    this.props.dispatch(findRelatedPodcasts(podcasts));
   }
 
   getPodcasts(term) {
@@ -50,16 +46,16 @@ class PodcastSearch extends Component {
   render() {
     return (
       <div>
-        <form onSubmit={this.handleSubmit}>
+        <form>
           <Select.Async
             className='searchbar'
             multi
             name='form-field-name'
-            placeholder='Type in a few podcasts you listen to and hit enter'
+            placeholder='Type in a few of your favorite podcasts.'
             loadOptions={this.getPodcasts}
             autoload={false}
             onChange={this.handleSelectChange}
-            value={this.props.value}
+            value={this.props.searchValue}
             onKeyPress={this.handleKeyPress}
           />
         </form>
@@ -76,9 +72,9 @@ class PodcastSearch extends Component {
 }
 
 const mapStateToProps = state => ({
-  value:         state.searchbarValue,
-  searchResults: state.searchResults,
-  loading:       state.loading
+  searchValue:    state.searchValue,
+  searchResults:  state.searchResults,
+  loading:        state.loading
 });
 
 export default connect(mapStateToProps)(PodcastSearch);

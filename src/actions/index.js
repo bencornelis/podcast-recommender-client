@@ -1,9 +1,9 @@
 import * as types from './../constants/ActionTypes';
 import PodcastSearchAPI from './../api/PodcastSearchApi';
 
-export const updateSearchValue = value => ({
+export const updateSearchValue = newSearchValue => ({
   type: types.UPDATE_SEARCH_VALUE,
-  value
+  newSearchValue
 });
 
 export const updateSearchResults = relatedPodcasts => ({
